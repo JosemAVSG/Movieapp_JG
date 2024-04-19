@@ -9,6 +9,7 @@ interface SeriesData {
   vote_average: number;
   first_air_date: string;
   overview:string;
+  genre_ids:[number];
 }
 const Series = async () => {
   const options = {
@@ -34,7 +35,6 @@ const Series = async () => {
 };
 const renderSeries = async () => {
   const seriesData = await Series();
-
   return (
     <div className="flex justify-center">
       <div className="grid grid-cols-3 md:grid-cols-4 sm:grid-cols-2 min-[320px]:grid-cols-1 max:-[600px]:grid-cols-1 m-5 ">
@@ -53,7 +53,20 @@ const renderSeries = async () => {
                 <strong>Fecha de Estreno:</strong> {element.first_air_date}
               </p>
               <p>
-                <strong>Rate:</strong> {element.vote_average}/10
+              {Array(5)
+                  .fill("")
+                  .map((_, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        marginRight: "2px",
+                        color: Math.floor(element.vote_average / 2)> i ? "#ffc107" : "#e4e5e9",
+                      }}
+                    >
+                      ★
+                    </span>
+                  ))}
+                { (element.vote_average / 2).toFixed(1)+ " / 5"}
               </p>
           
               <p>

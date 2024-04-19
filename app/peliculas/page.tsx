@@ -10,6 +10,7 @@ interface MoviesData {
   release_date: string;
   overview:string;
 }
+
 const Movies= async () => {
   const options = {
     method: 'GET',
@@ -34,8 +35,11 @@ const Movies= async () => {
 };
 const peliculas= async () => {
   const moviesData = await Movies();
-
   return (
+    
+    <div className="[background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#041e70_100%)]">
+
+
     <div className="flex justify-center">
       <div className="grid grid-cols-3 md:grid-cols-4 sm:grid-cols-2 min-[320px]:grid-cols-1 max:-[600px]:grid-cols-1 m-5 ">
         {moviesData.results.map((element: MoviesData) => (
@@ -53,7 +57,22 @@ const peliculas= async () => {
                 <strong>Fecha de Estreno:</strong> {element.release_date}
               </p>
               <p>
-                <strong>Rate:</strong> {element.vote_average}/10
+                <strong>Rate:</strong>
+                {Array(5)
+                  .fill("")
+                  .map((_, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        marginRight: "2px",
+                        color: Math.floor(element.vote_average / 2)> i ? "#ffc107" : "#e4e5e9",
+                      }}
+                    >
+                      ★
+                    </span>
+                  ))}
+                { (element.vote_average / 2).toFixed(1)+ " / 5"}
+                
               </p>
           
               <p>
@@ -63,6 +82,7 @@ const peliculas= async () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

@@ -29,9 +29,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.className} antialiased`}>
         <Navbar></Navbar>
-
+        
         {children}
-
         <Footer></Footer>
       </body>
     </html>

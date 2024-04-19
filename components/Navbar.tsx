@@ -25,6 +25,7 @@ export default function Navbar() {
           </Link>
         </li>
       </ul>
+      <input className='w-1/4 rounded-full self-center p-2 pl-5 h-10 bg-gray-100 focus:outline-none focus:shadow-md' type='search' placeholder='Busqueda'></input>
     </nav>
   );
 }
